@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header :cases="cases" :deaths="deaths" :recovered="recovered" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/Header.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Header
+  },
+  data() {
+    return {
+      cases: undefined,
+      deaths: undefined,
+      recovered: undefined
+    };
+  },
+  created() {
+    fetch("https://coronavirus-19-api.herokuapp.com/all")
+      .then(res => res.json())
+      .then(data => {
+        this.cases = data.cases;
+        this.deaths = data.deaths;
+        this.recovered = data.recovered;
+      })
+      .catch(err => console.log(err));
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  overflow-x: hidden;
 }
 </style>
