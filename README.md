@@ -1,5 +1,3 @@
-# COVID-19 STATISTICS
-
 # COVID-19 STATISTICS  (VUE)
 
 Runs the app in the development mode.<br />
